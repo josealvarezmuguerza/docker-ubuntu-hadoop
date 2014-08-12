@@ -6,7 +6,7 @@ This docker script aims to create a ~~virtual machine~~ virtual environment with
 - Ubuntu 14.04 LTS, with updated packages
 - JDK 1.7
 - Apache Hadoop 2.3
-- maven 3
+- maven
 
 You can also join a single-node-hadoop-instance running in the OS host, to this new node, since the VE is configured with open ports for this purpose. 
 
