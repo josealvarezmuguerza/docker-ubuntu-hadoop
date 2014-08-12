@@ -31,7 +31,6 @@ RUN service ssh start
 # Setup Hadoop
 ENV HADOOP_HOME /usr/local/hadoop
 #Download hadoop tools here or paste it here
-#RUN rm -r /usr/local/hadoop-2.3.0
 ADD hadoop-2.3.0.tar.gz ./hadoop-2.3.0.tar.gz
 RUN mv hadoop-2.3.0.tar.gz/hadoop-2.3.0 /usr/local/hadoop-2.3.0
 RUN rm -rf hadoop-2.3.0.tar.gz
@@ -111,5 +110,5 @@ EXPOSE 9000 50010 50020 50070 50075 50090 50470 50475
 # open YARN ports
 EXPOSE 8088 8032 50060
 
-#debería lanzarse con el user hduser
+#star-hadoop.sh starts hadoop as hduser
 CMD ["/bin/bash", "start-hadoop.sh"]
