@@ -35,7 +35,6 @@ ADD hadoop-2.3.0.tar.gz ./hadoop-2.3.0.tar.gz
 RUN mv hadoop-2.3.0.tar.gz/hadoop-2.3.0 /usr/local/hadoop-2.3.0
 RUN rm -rf hadoop-2.3.0.tar.gz
 RUN ln -s /usr/local/hadoop-2.3.0 $HADOOP_HOME
-RUN rm -r /usr/local/hadoop-2.3.0
 RUN mkdir -p $HADOOP_HOME/logs
 ENV HADOOP_DATA /var/lib/hadoop
 RUN mkdir -p $HADOOP_DATA/2.3.0/data
@@ -82,11 +81,11 @@ RUN mkdir -p $HADOOP_DATA/current/data/hdfs/datanode
 
 # Configure YARN
 #configure yarn-site.xml file
-sed 's/<\/configuration>/ \n  <property>\n    <name>yarn.nodemanager.aux-services<\/name>\n    <value>mapreduce_shuffle<\/value>\n  <\/property>  \n\n  <property>\n    <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class<\/name>\n    <value>org.apache.hadoop.mapred.ShuffleHandler<\/value>\n  <\/property>  \n\n  <property>\n    <name>yarn.nodemanager.resource.cpu-vcores<\/name>\n    <value>4<\/value>\n  <\/property>  \n\n<\/configuration>/' $HADOOP_HOME/etc/hadoop/yarn-site.xml > $HADOOP_HOME/etc/hadoop/yarn-site.xml-tmp | mv $HADOOP_HOME/etc/hadoop/yarn-site.xml-tmp $HADOOP_HOME/etc/hadoop/yarn-site.xml
+RUN sed 's/<\/configuration>/ \n  <property>\n    <name>yarn.nodemanager.aux-services<\/name>\n    <value>mapreduce_shuffle<\/value>\n  <\/property>  \n\n  <property>\n    <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class<\/name>\n    <value>org.apache.hadoop.mapred.ShuffleHandler<\/value>\n  <\/property>  \n\n  <property>\n    <name>yarn.nodemanager.resource.cpu-vcores<\/name>\n    <value>4<\/value>\n  <\/property>  \n\n<\/configuration>/' $HADOOP_HOME/etc/hadoop/yarn-site.xml > $HADOOP_HOME/etc/hadoop/yarn-site.xml-tmp | mv $HADOOP_HOME/etc/hadoop/yarn-site.xml-tmp $HADOOP_HOME/etc/hadoop/yarn-site.xml
 
 
 #configure mapred-site.xml file
-RUN sed 's/<\/configuration>/\n  <property>\n    <name>mapreduce.framework.name<\/name>\n    <value>yarn<\/value>\n  <\/property>\n\n<\/configuration>/'  $HADOOP_HOME/etc/hadoop/mapred-site.xml > $HADOOP_HOME/etc/hadoop/mapred-site.xml-tmp | mv $HADOOP_HOME/etc/hadoop/mapred-site.xml-tmp $HADOOP_HOME/etc/hadoop/mapred-site.xml
+RUN sed 's/<\/configuration>/\n  <property>\n    <name>mapreduce.framework.name<\/name>\n    <value>yarn<\/value>\n  <\/property>\n\n<\/configuration>/'  $HADOOP_HOME/etc/hadoop/mapred-site.xml.template > $HADOOP_HOME/etc/hadoop/mapred-site.xml
 
 
 # Configure directory ownership
