@@ -37,7 +37,7 @@ docker build -rm --tag=hadoop-instance .
 ```
 
 
-###Estimated duration
+###Estimated setup duration
 About 60 mins. (1 min machine setup + 59 mins OS packages upgrades)
 
 Usage
@@ -45,6 +45,10 @@ Usage
 ```java
 sudo docker run -i -t -P --name nodo01 -v {any/shared/folder/in/host}:{/shared/folder/in/VM} hadoop-instance /bin/bash start-hadoop.sh
 ```
+
+###Estimated load duration
+About 1 sec
+
 
 License
 =======
